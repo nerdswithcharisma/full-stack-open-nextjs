@@ -25,3 +25,7 @@ const blogs = [
 export const getBlogs = () => {
   return blogs;
 };
+
+export const addBlogPost = (title: string, author: string, url: string) => {
+  blogs.push({ id: blogs.length + 1, title, author, url, likes: 0 });
+};
