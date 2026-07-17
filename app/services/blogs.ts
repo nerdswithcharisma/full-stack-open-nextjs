@@ -29,3 +29,12 @@ export const getBlogs = () => {
 export const addBlogPost = (title: string, author: string, url: string) => {
   blogs.push({ id: blogs.length + 1, title, author, url, likes: 0 });
 };
+
+export const getBlogById = (id: number) => {
+  return blogs.find((blog) => blog.id === id);
+};
+
+export const toggleLike = (id: number) => {
+  const blog = blogs.find((blog) => blog.id === id);
+  if (blog) blog.likes++;
+};
