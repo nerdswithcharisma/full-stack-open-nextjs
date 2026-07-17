@@ -38,3 +38,10 @@ export const toggleLike = (id: number) => {
   const blog = blogs.find((blog) => blog.id === id);
   if (blog) blog.likes++;
 };
+
+export const filterBlogs = (filter: string) => {
+  console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', filter);
+  return blogs.filter((blog) =>
+    blog.title.toLowerCase().includes(filter.toLowerCase()),
+  );
+};

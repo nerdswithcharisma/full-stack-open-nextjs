@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { addBlogPost, toggleLike } from '../services/blogs';
+import { addBlogPost, filterBlogs, toggleLike } from '../services/blogs';
 
 export const createBlogPost = async (formData: FormData) => {
   const title = formData.get('title') as string;
@@ -20,4 +20,11 @@ export const toggleBlogLike = async (formData: FormData) => {
   toggleLike(parseInt(id));
   revalidatePath('/blogs');
   redirect(`/blogs/${id}`);
+};
+
+export const filterBlogAction = async (formData: FormData) => {
+  const filter = formData.get('filter') as string;
+  filterBlogs(filter);
+  revalidatePath('/blogs');
+  redirect(`/blogs?filter=${filter}`);
 };
