@@ -40,7 +40,6 @@ export const toggleLike = (id: number) => {
 };
 
 export const filterBlogs = (filter: string) => {
-  console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', filter);
   return blogs.filter((blog) =>
     blog.title.toLowerCase().includes(filter.toLowerCase()),
   );

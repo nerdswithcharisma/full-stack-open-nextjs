@@ -18,8 +18,8 @@ const Blogs = async ({
     <div>
       <h2>Latest Blog Posts</h2>
       <form action={filterBlogAction}>
-        <input type="text" name="filter" />
-        <button type="submit">Filter</button>
+        <input type="text" name="filter" defaultValue={filter} />
+        <button type="submit">Search</button>
       </form>
       <ul>
         {blogs.map((blog) => (
