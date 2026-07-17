@@ -4,7 +4,7 @@ import { toggleBlogLike } from '@/app/actions/blog';
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const post = getBlogById(Number(id));
+  const post = await getBlogById(Number(id));
 
   if (!post) notFound();
 

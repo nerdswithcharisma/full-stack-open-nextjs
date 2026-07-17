@@ -3,7 +3,6 @@ import { notes } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const getNotes = async (importantOnly: boolean) => {
-  console.log(importantOnly);
   if (importantOnly) {
     return db.query.notes.findMany({
       where: eq(notes.important, true),
@@ -27,13 +26,9 @@ export const toggleImportance = async (id: number) => {
   const note = await getNoteById(id);
 
   if (note) {
-    console.log('🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊 updating');
     await db
       .update(notes)
       .set({ important: !note.important })
       .where(eq(notes.id, id));
   }
-
-  // const note = notes.find((note) => note.id === id);
-  // if (note) note.important = !note.important;
 };
