@@ -8,14 +8,14 @@ export const createNote = async (formData: FormData) => {
   const content = formData.get('content') as string;
   const important = formData.get('important') as unknown as boolean;
 
-  addNote(content, important);
+  await addNote(content, important);
   revalidatePath('/notes');
   redirect('/notes');
 };
 
 export const toggleNoteImportance = async (formData: FormData) => {
   const id = formData.get('id') as string;
-  toggleImportance(parseInt(id));
+  await toggleImportance(parseInt(id));
 
   revalidatePath('/notes');
   redirect(`/notes/${id}`);

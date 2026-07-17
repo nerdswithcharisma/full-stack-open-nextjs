@@ -1,6 +1,6 @@
 import { createNote } from "@/app/actions/notes";
 
-const NewNote = () => {
+const NewNote = async () => {
   return (
     <div>
       <h2>Create a new note</h2>
