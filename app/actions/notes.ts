@@ -8,10 +8,17 @@ import { db } from '@/db';
 import { notes } from '@/db/schema';
 import { getCurrentUser } from '../services/session';
 
-export const createNote = async (formData: FormData) => {
+export const createNote = async (
+  prevState: { error?: string },
+  formData: FormData,
+) => {
   const session = await auth();
   if (!session) redirect('/login');
+
   const content = formData.get('content') as string;
+  if (!content || content.length < 10)
+    return { error: 'Content must be at least 10 characters long' };
+
   const important = formData.get('important') as unknown as boolean;
 
   await addNote(content, important);
