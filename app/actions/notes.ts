@@ -3,14 +3,24 @@
 import { redirect } from 'next/navigation';
 import { addNote, toggleImportance } from '../services/notes';
 import { revalidatePath } from 'next/cache';
+import { auth } from '@/auth';
+import { db } from '@/db';
+import { notes } from '@/db/schema';
+import { getCurrentUser } from '../services/session';
 
 export const createNote = async (formData: FormData) => {
+  const session = await auth();
+  if (!session) redirect('/login');
   const content = formData.get('content') as string;
   const important = formData.get('important') as unknown as boolean;
 
   await addNote(content, important);
-  revalidatePath('/notes');
-  redirect('/notes');
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error('Not logged in');
+  }
+
+  await db.insert(notes).values({ content, important, userId: user.id });
 };
 
 export const toggleNoteImportance = async (formData: FormData) => {
